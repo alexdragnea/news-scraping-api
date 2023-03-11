@@ -1,0 +1,4 @@
+server:
+  port: 8181
+website:
+  urls: https://mashable.com/tech,https://gizmodo.com/
