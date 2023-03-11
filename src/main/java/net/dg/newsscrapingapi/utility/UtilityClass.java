@@ -40,7 +40,7 @@ public class UtilityClass {
     }
   }
 
-  public static void  extractDataFromMashable(Set<News> newsSet, String url) {
+  public static void extractDataFromMashable(Set<News> newsSet, String url) {
     try {
       Document document = Jsoup.connect(url).get();
 
