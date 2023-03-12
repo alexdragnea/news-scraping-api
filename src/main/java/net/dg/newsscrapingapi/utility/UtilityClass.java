@@ -45,14 +45,14 @@ public class UtilityClass {
       Document document = Jsoup.connect(url).get();
 
       Element element = document.getElementsByClass(
-          "flex overflow-x-auto overflow-y-hidden flex-row space-x-8").first();
+          "justify-center mt-8 w-full").first();
 
-      Elements elements = element.getElementsByClass("flex-1");
+      Elements elements = element.getElementsByClass("flex flex-row mx-auto mt-4 max-w-4xl font-sans md:flex-nowrap md:justify-around md:mx-0 md:mt-8");
       for (Element ads : elements) {
         News news = new News();
 
-        if (!isEmpty(ads.select("a").last().text())) {
-          news.setTitle(ads.select("a").last().text());
+        if (!isEmpty(ads.select("a").first().text())) {
+          news.setTitle(ads.select("a").first().text());
           news.setUrl("https://mashable.com" + ads.select("a").attr("href"));
           news.setImgSrc(ads.select("img").attr("src"));
           news.setSource("Mashable.com");
