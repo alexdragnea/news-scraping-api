@@ -6,6 +6,4 @@ import net.dg.newsscrapingapi.model.News;
 public interface ScraperService {
 
   Set<News> scrapeNews();
-
-
 }

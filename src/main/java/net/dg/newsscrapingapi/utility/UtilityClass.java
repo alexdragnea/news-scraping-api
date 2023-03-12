@@ -1,6 +1,5 @@
 package net.dg.newsscrapingapi.utility;
 
-
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.io.IOException;
@@ -16,7 +15,8 @@ import org.jsoup.select.Elements;
 
 public class UtilityClass {
 
-  private static final   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+  private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
   public static void extractDataFromGizmodo(Set<News> newsSet, String url) {
 
     try {
@@ -49,10 +49,11 @@ public class UtilityClass {
     try {
       Document document = Jsoup.connect(url).get();
 
-      Element element = document.getElementsByClass(
-          "justify-center mt-8 w-full").first();
+      Element element = document.getElementsByClass("justify-center mt-8 w-full").first();
 
-      Elements elements = element.getElementsByClass("flex flex-row mx-auto mt-4 max-w-4xl font-sans md:flex-nowrap md:justify-around md:mx-0 md:mt-8");
+      Elements elements =
+          element.getElementsByClass(
+              "flex flex-row mx-auto mt-4 max-w-4xl font-sans md:flex-nowrap md:justify-around md:mx-0 md:mt-8");
       for (Element ads : elements) {
         News news = new News();
 
@@ -73,5 +74,4 @@ public class UtilityClass {
       e.printStackTrace();
     }
   }
-
 }

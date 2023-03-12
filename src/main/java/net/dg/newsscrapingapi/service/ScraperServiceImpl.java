@@ -1,6 +1,5 @@
 package net.dg.newsscrapingapi.service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Service
 public class ScraperServiceImpl implements ScraperService {
-
 
   @Value("#{'${website.urls}'.split(',')}")
   private List<String> urls;
@@ -30,7 +28,6 @@ public class ScraperServiceImpl implements ScraperService {
       } else if (url.contains("gizmodo")) {
         UtilityClass.extractDataFromGizmodo(newsSet, url);
       }
-
     }
 
     return newsSet;

@@ -14,8 +14,7 @@ public class TestController {
   private final ScraperService scraperService;
 
   @GetMapping("/test")
-  public Set<News> testEndpoint(){
+  public Set<News> testEndpoint() {
     return scraperService.scrapeNews();
   }
-
 }
