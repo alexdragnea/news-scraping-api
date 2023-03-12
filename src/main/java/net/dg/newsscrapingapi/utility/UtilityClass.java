@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
+import net.dg.newsscrapingapi.constants.Source;
 import net.dg.newsscrapingapi.model.News;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -32,7 +33,7 @@ public class UtilityClass {
           news.setTitle(ads.select("a").attr("title"));
           news.setUrl(ads.select("a").attr("href"));
           news.setImgSrc(ads.getElementsByTag("img").attr("data-src"));
-          news.setSource("Gizmodo.com");
+          news.setSource(Source.GHIZMODO.getSource());
           news.setScrapedDate(LocalDate.from(LocalDateTime.now()));
         }
         if (news.getUrl() != null) {
@@ -61,7 +62,7 @@ public class UtilityClass {
           news.setTitle(ads.select("a").first().text());
           news.setUrl("https://mashable.com" + ads.select("a").attr("href"));
           news.setImgSrc(ads.select("img").attr("src"));
-          news.setSource("Mashable.com");
+          news.setSource(Source.MASHABLE.getSource());
           news.setPublishedDate(LocalDate.parse(ads.select("time").text(), formatter));
           news.setScrapedDate(LocalDate.from(LocalDateTime.now()));
         }

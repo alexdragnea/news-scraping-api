@@ -1,8 +1,8 @@
 package net.dg.newsscrapingapi.constants;
 
 public enum Source {
-  GHIZMODO("Ghizmodo"),
-  MASHABLE("MASHABLE");
+  GHIZMODO("Ghizmodo.com"),
+  MASHABLE("Mashable.com");
 
   private String source;
 
