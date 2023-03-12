@@ -4,6 +4,9 @@ package net.dg.newsscrapingapi.utility;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import net.dg.newsscrapingapi.model.News;
 import org.jsoup.Jsoup;
@@ -13,6 +16,7 @@ import org.jsoup.select.Elements;
 
 public class UtilityClass {
 
+  private static final   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
   public static void extractDataFromGizmodo(Set<News> newsSet, String url) {
 
     try {
@@ -29,6 +33,7 @@ public class UtilityClass {
           news.setUrl(ads.select("a").attr("href"));
           news.setImgSrc(ads.getElementsByTag("img").attr("data-src"));
           news.setSource("Gizmodo.com");
+          news.setScrapedDate(LocalDate.from(LocalDateTime.now()));
         }
         if (news.getUrl() != null) {
           newsSet.add(news);
@@ -56,6 +61,8 @@ public class UtilityClass {
           news.setUrl("https://mashable.com" + ads.select("a").attr("href"));
           news.setImgSrc(ads.select("img").attr("src"));
           news.setSource("Mashable.com");
+          news.setPublishedDate(LocalDate.parse(ads.select("time").text(), formatter));
+          news.setScrapedDate(LocalDate.from(LocalDateTime.now()));
         }
         if (news.getUrl() != null) {
           newsSet.add(news);
