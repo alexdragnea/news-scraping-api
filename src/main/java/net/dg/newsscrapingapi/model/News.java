@@ -1,11 +1,10 @@
 package net.dg.newsscrapingapi.model;
 
+import java.time.LocalDate;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
