@@ -27,11 +27,6 @@ public class News {
 
   private String source;
 
-  @JsonInclude(Include.NON_NULL)
-  @Transient
-  @Column(name = "published_date")
-  private LocalDate publishedDate;
-
   @Column(name = "scraped_date")
   private LocalDate scrapedDate;
 }
