@@ -1,4 +1,18 @@
 server:
   port: 8181
+
 website:
   urls: https://mashable.com/tech,https://gizmodo.com/
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/scraper
+    username: postgres
+    password: admin
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
