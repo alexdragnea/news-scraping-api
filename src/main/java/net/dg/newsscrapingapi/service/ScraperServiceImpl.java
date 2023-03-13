@@ -2,6 +2,8 @@ package net.dg.newsscrapingapi.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import lombok.AllArgsConstructor;
 import net.dg.newsscrapingapi.model.News;
 import net.dg.newsscrapingapi.repository.NewsRepository;
@@ -20,18 +22,26 @@ public class ScraperServiceImpl implements ScraperService {
 
   @Override
   public List<News> scrapeNews() {
-    List<News> newsSet = new ArrayList<>();
+    List<News> newsList = new ArrayList<>();
+    List<News> uniqueNews = new ArrayList<>();
 
     for (String url : urls) {
 
       if (url.contains("mashable")) {
 
-        UtilityClass.extractDataFromMashable(newsSet, url);
+        UtilityClass.extractDataFromMashable(newsList, url);
       } else if (url.contains("gizmodo")) {
-        UtilityClass.extractDataFromGizmodo(newsSet, url);
+        UtilityClass.extractDataFromGizmodo(newsList, url);
       }
     }
 
-    return newsRepository.saveAll(newsSet);
+    for(News news: newsList){
+      Optional<News> existingNews = newsRepository.getNewsByTitle(news.getTitle());
+      if (!existingNews.isPresent())
+        uniqueNews.add(news);
+    }
+
+    return newsRepository.saveAll(uniqueNews);
+
   }
 }
