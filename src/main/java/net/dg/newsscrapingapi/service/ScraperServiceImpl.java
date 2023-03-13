@@ -3,7 +3,6 @@ package net.dg.newsscrapingapi.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import lombok.AllArgsConstructor;
 import net.dg.newsscrapingapi.model.News;
 import net.dg.newsscrapingapi.repository.NewsRepository;
@@ -35,13 +34,11 @@ public class ScraperServiceImpl implements ScraperService {
       }
     }
 
-    for(News news: newsList){
+    for (News news : newsList) {
       Optional<News> existingNews = newsRepository.getNewsByTitle(news.getTitle());
-      if (!existingNews.isPresent())
-        uniqueNews.add(news);
+      if (existingNews.isEmpty()) uniqueNews.add(news);
     }
 
     return newsRepository.saveAll(uniqueNews);
-
   }
 }
