@@ -5,7 +5,7 @@ website:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/docker
+    url: jdbc:postgresql://localhost:5433/scraper
 spring:
   jpa:
     properties:
