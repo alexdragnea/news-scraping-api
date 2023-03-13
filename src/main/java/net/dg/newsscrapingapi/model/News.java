@@ -15,15 +15,17 @@ import java.time.LocalDate;
 @Entity
 public class News {
 
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   private String title;
+
   private String url;
 
   @Column(name = "img_source")
   private String imgSrc;
+
   private String source;
 
   @JsonInclude(Include.NON_NULL)

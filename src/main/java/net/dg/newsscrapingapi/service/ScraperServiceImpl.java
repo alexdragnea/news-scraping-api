@@ -1,24 +1,27 @@
 package net.dg.newsscrapingapi.service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import lombok.AllArgsConstructor;
 import net.dg.newsscrapingapi.model.News;
+import net.dg.newsscrapingapi.repository.NewsRepository;
 import net.dg.newsscrapingapi.utility.UtilityClass;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @Service
 public class ScraperServiceImpl implements ScraperService {
 
+  private final NewsRepository newsRepository;
+
   @Value("#{'${website.urls}'.split(',')}")
   private List<String> urls;
 
   @Override
-  public Set<News> scrapeNews() {
-    Set<News> newsSet = new HashSet<>();
+  public List<News> scrapeNews() {
+    List<News> newsSet = new ArrayList<>();
 
     for (String url : urls) {
 
@@ -30,6 +33,6 @@ public class ScraperServiceImpl implements ScraperService {
       }
     }
 
-    return newsSet;
+    return newsRepository.saveAll(newsSet);
   }
 }

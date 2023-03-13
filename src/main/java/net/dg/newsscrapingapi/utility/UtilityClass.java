@@ -1,12 +1,5 @@
 package net.dg.newsscrapingapi.utility;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Set;
 import net.dg.newsscrapingapi.constants.Source;
 import net.dg.newsscrapingapi.model.News;
 import org.jsoup.Jsoup;
@@ -14,11 +7,19 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+
 public class UtilityClass {
 
   private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-  public static void extractDataFromGizmodo(Set<News> newsSet, String url) {
+  public static void extractDataFromGizmodo(List<News> newsList, String url) {
 
     try {
       Document document = Jsoup.connect(url).get();
@@ -37,7 +38,7 @@ public class UtilityClass {
           news.setScrapedDate(LocalDate.from(LocalDateTime.now()));
         }
         if (news.getUrl() != null) {
-          newsSet.add(news);
+          newsList.add(news);
         }
       }
 
@@ -46,7 +47,7 @@ public class UtilityClass {
     }
   }
 
-  public static void extractDataFromMashable(Set<News> newsSet, String url) {
+  public static void extractDataFromMashable(List<News> newsList, String url) {
     try {
       Document document = Jsoup.connect(url).get();
 
@@ -67,7 +68,7 @@ public class UtilityClass {
           news.setScrapedDate(LocalDate.from(LocalDateTime.now()));
         }
         if (news.getUrl() != null) {
-          newsSet.add(news);
+          newsList.add(news);
         }
       }
 
