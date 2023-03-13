@@ -9,7 +9,6 @@ spring:
     url: jdbc:postgresql://localhost:5433/scraper
     username: postgres
     password: admin
-
   jpa:
     properties:
       hibernate:
