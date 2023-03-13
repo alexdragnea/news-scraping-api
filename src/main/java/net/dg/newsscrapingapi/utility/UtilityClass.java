@@ -1,19 +1,18 @@
 package net.dg.newsscrapingapi.utility;
 
-import net.dg.newsscrapingapi.constants.Source;
-import net.dg.newsscrapingapi.model.News;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import static org.apache.commons.lang3.StringUtils.isEmpty;
+import net.dg.newsscrapingapi.constants.Source;
+import net.dg.newsscrapingapi.model.News;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class UtilityClass {
 

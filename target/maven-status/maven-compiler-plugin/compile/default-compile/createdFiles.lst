@@ -1,0 +1,8 @@
+net\dg\newsscrapingapi\service\ScraperService.class
+net\dg\newsscrapingapi\model\News.class
+net\dg\newsscrapingapi\service\ScraperServiceImpl.class
+net\dg\newsscrapingapi\repository\NewsRepository.class
+net\dg\newsscrapingapi\constants\Source.class
+net\dg\newsscrapingapi\NewsScrapingApiApplication.class
+net\dg\newsscrapingapi\utility\UtilityClass.class
+net\dg\newsscrapingapi\rest\TestController.class
