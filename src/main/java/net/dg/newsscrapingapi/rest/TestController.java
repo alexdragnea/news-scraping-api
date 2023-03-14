@@ -13,8 +13,8 @@ public class TestController {
 
   private final ScraperService scraperService;
 
-  @GetMapping("/test")
-  public List<News> testEndpoint() {
+  @GetMapping("/latestNews")
+  public List<News> latestNews() {
     return scraperService.scrapeNews();
   }
 }
