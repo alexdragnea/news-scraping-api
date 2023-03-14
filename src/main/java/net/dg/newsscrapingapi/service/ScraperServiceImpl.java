@@ -8,6 +8,10 @@ import net.dg.newsscrapingapi.model.News;
 import net.dg.newsscrapingapi.repository.NewsRepository;
 import net.dg.newsscrapingapi.utility.UtilityClass;
 import org.springframework.beans.factory.annotation.Value;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
@@ -44,6 +48,9 @@ public class ScraperServiceImpl implements ScraperService {
 
   @Override
   public List<News> findLatest20News() {
-    return null;
+
+    Page<News> page = newsRepository.findAll(
+            PageRequest.of(0, 20, Sort.by(Sort.Direction.ASC, "scrapedDate")));
+    return page.getContent();
   }
 }

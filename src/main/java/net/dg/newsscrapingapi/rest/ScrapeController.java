@@ -6,6 +6,7 @@ import net.dg.newsscrapingapi.model.News;
 import net.dg.newsscrapingapi.service.ScraperService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +22,12 @@ public class ScrapeController {
 
     LOGGER.info("Inside of latestNews method of ScrapeController");
     return scraperService.scrapeNews();
+  }
+
+  @GetMapping("/latest10News")
+  public List<News> latest10News() {
+
+    LOGGER.info("Inside of latest10News method of ScrapeController");
+    return scraperService.findLatest20News();
   }
 }
