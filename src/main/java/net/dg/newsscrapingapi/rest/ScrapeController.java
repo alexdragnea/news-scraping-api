@@ -4,40 +4,37 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import net.dg.newsscrapingapi.model.News;
 import net.dg.newsscrapingapi.service.ScraperService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1")
+@CrossOrigin
 public class ScrapeController {
 
   private final ScraperService scraperService;
   private static final Logger LOGGER = LoggerFactory.getLogger(ScrapeController.class);
 
-  @GetMapping("/scrapeNews")
+  @GetMapping("/scrapenews")
   public ResponseEntity<List<News>> scrapeNews() {
 
     LOGGER.info("Inside of scrapeNews method of ScrapeController");
     return ResponseEntity.ok(scraperService.scrapeNews());
   }
 
-  @GetMapping("/latestNews")
-  public ResponseEntity<List<News>> latestNews() {
+  @GetMapping("/latestnews")
+  public ResponseEntity<List<News>> latestNews(@RequestParam(required = false) String keyword) {
 
     LOGGER.info("Inside of latestNews method of ScrapeController");
-    return ResponseEntity.ok(scraperService.findLatestNews(1, 20));
-  }
 
-  @GetMapping("/news/search")
-  public ResponseEntity<List<News>> findNewsByKeyword(@RequestParam String keyword) {
+    if (StringUtils.isEmpty(keyword)) {
+      return ResponseEntity.ok(scraperService.findLatestNews(1, 20));
+    }
 
-    LOGGER.info("Inside of findNewsByKeyword method of ScrapeController");
     return ResponseEntity.ok(scraperService.findByKeyword(keyword));
   }
 }
