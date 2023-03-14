@@ -7,5 +7,6 @@ public interface ScraperService {
 
   List<News> scrapeNews();
 
-  List<News> findLatestNews(int page, int size);
+  List<News> findLatestNews(int pageNmber, int size);
+  List<News> findByKeyword(String keyword);
 }

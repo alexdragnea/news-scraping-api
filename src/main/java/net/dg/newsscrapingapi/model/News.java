@@ -1,17 +1,15 @@
 package net.dg.newsscrapingapi.model;
 
-import lombok.*;
-import org.hibernate.Hibernate;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import javax.persistence.*;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@RequiredArgsConstructor
 @Entity
 public class News {
 

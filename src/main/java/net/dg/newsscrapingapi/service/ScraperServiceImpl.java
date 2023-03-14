@@ -1,8 +1,5 @@
 package net.dg.newsscrapingapi.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import lombok.AllArgsConstructor;
 import net.dg.newsscrapingapi.model.News;
 import net.dg.newsscrapingapi.repository.NewsRepository;
@@ -12,6 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -46,11 +47,16 @@ public class ScraperServiceImpl implements ScraperService {
   }
 
   @Override
-  public List<News> findLatestNews(int page, int size) {
+  public List<News> findLatestNews(int pageNmber, int size) {
 
     Page<News> page =
         newsRepository.findAll(
-            PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "scrapedDateTime")));
+            PageRequest.of(pageNmber, size, Sort.by(Sort.Direction.DESC, "scrapedDateTime")));
     return page.getContent();
+  }
+
+  @Override
+  public List<News> findByKeyword(String keyword) {
+    return newsRepository.findByKeyword(keyword);
   }
 }
