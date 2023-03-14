@@ -28,6 +28,6 @@ public class ScrapeController {
   public ResponseEntity<List<News>> latestNews() {
 
     LOGGER.info("Inside of latest20News method of ScrapeController");
-    return ResponseEntity.ok(scraperService.findLatestNews());
+    return ResponseEntity.ok(scraperService.findLatestNews(1, 20));
   }
 }

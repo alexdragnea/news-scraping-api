@@ -1,14 +1,17 @@
 package net.dg.newsscrapingapi.model;
 
-import java.time.LocalDateTime;
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 public class News {
 
@@ -27,4 +30,17 @@ public class News {
 
   @Column(name = "scraped_date_time")
   private LocalDateTime scrapedDateTime;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+    News news = (News) o;
+    return id != null && Objects.equals(id, news.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return getClass().hashCode();
+  }
 }

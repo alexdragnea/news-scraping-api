@@ -46,11 +46,11 @@ public class ScraperServiceImpl implements ScraperService {
   }
 
   @Override
-  public List<News> findLatestNews() {
+  public List<News> findLatestNews(int page, int size) {
 
     Page<News> page =
         newsRepository.findAll(
-            PageRequest.of(0, 20, Sort.by(Sort.Direction.DESC, "scrapedDateTime")));
+            PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "scrapedDateTime")));
     return page.getContent();
   }
 }

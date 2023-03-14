@@ -7,5 +7,5 @@ public interface ScraperService {
 
   List<News> scrapeNews();
 
-  List<News> findLatestNews();
+  List<News> findLatestNews(int page, int size);
 }
