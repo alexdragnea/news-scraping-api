@@ -3,7 +3,6 @@ package net.dg.newsscrapingapi.utility;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import net.dg.newsscrapingapi.constants.Source;
@@ -31,7 +30,7 @@ public class UtilityClass {
           news.setUrl(ads.select("a").attr("href"));
           news.setImgSrc(ads.getElementsByTag("img").attr("data-src"));
           news.setSource(Source.GHIZMODO.getSource());
-          news.setScrapedDate(LocalDateTime.from(LocalDateTime.now()));
+          news.setScrapedDateTime(LocalDateTime.from(LocalDateTime.now()));
         }
         if (news.getUrl() != null) {
           newsList.add(news);
@@ -60,7 +59,7 @@ public class UtilityClass {
           news.setUrl("https://mashable.com" + ads.select("a").attr("href"));
           news.setImgSrc(ads.select("img").attr("src"));
           news.setSource(Source.MASHABLE.getSource());
-          news.setScrapedDate(LocalDateTime.from(LocalDateTime.now()));
+          news.setScrapedDateTime(LocalDateTime.from(LocalDateTime.now()));
         }
         if (news.getUrl() != null) {
           newsList.add(news);
