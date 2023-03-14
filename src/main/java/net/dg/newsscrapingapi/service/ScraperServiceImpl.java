@@ -1,5 +1,8 @@
 package net.dg.newsscrapingapi.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import net.dg.newsscrapingapi.model.News;
 import net.dg.newsscrapingapi.repository.NewsRepository;
@@ -9,10 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Service
