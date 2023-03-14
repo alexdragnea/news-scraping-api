@@ -41,4 +41,9 @@ public class ScraperServiceImpl implements ScraperService {
 
     return newsRepository.saveAll(uniqueNews);
   }
+
+  @Override
+  public List<News> findLatest20News() {
+    return null;
+  }
 }
