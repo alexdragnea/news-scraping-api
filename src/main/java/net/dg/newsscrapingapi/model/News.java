@@ -1,6 +1,7 @@
 package net.dg.newsscrapingapi.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,5 +27,5 @@ public class News {
   private String source;
 
   @Column(name = "scraped_date")
-  private LocalDate scrapedDate;
+  private LocalDateTime scrapedDate;
 }
