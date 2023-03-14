@@ -7,5 +7,5 @@ import org.springframework.data.domain.Page;
 public interface ScraperService {
 
   List<News> scrapeNews();
-  List<News> findLatest20News();
+  List<News> findLatestNews();
 }
