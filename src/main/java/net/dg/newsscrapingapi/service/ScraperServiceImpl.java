@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import net.dg.newsscrapingapi.model.News;
+import net.dg.newsscrapingapi.model.ResponseBody;
 import net.dg.newsscrapingapi.repository.NewsRepository;
 import net.dg.newsscrapingapi.utility.UtilityClass;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,5 +58,10 @@ public class ScraperServiceImpl implements ScraperService {
   @Override
   public List<News> findByKeyword(String keyword) {
     return newsRepository.findByKeyword(keyword);
+  }
+
+  @Override
+  public ResponseBody getNews() {
+    return null;
   }
 }
