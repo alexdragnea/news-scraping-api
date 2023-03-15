@@ -3,6 +3,7 @@ package net.dg.newsscrapingapi.rest;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import net.dg.newsscrapingapi.model.News;
+import net.dg.newsscrapingapi.model.ResponseBody;
 import net.dg.newsscrapingapi.service.ScraperService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -36,5 +37,10 @@ public class ScrapeController {
     }
 
     return ResponseEntity.ok(scraperService.findByKeyword(keyword));
+  }
+
+  @GetMapping("/news")
+  public ResponseEntity<ResponseBody> getAllNews(){
+    return ResponseEntity.ok(scraperService.getNews());
   }
 }

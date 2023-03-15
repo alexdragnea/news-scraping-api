@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigInteger;
 import java.util.List;
 
 @Data
@@ -13,5 +12,5 @@ import java.util.List;
 public class ResponseBody {
 
   private List<News> news;
-  private BigInteger totalCount;
+  private Long totalCount;
 }
