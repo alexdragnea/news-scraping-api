@@ -19,7 +19,8 @@ public class UtilityClass {
     try {
       Document document = Jsoup.connect(url).get();
 
-      Element element = document.getElementsByClass("sc-1pxu3ok-1 sTtSe").first();
+      Element element =
+          document.getElementsByClass("sc-1kfqkp9-0 lboISa sc-1s9hjy6-0 llwBwG").first();
 
       Elements elements = element.getElementsByTag("article");
       for (Element ads : elements) {
@@ -28,7 +29,9 @@ public class UtilityClass {
         if (!isEmpty(ads.select("a").attr("title"))) {
           news.setTitle(ads.select("a").attr("title"));
           news.setUrl(ads.select("a").attr("href"));
-          news.setImgSrc(ads.getElementsByTag("img").attr("data-src"));
+          String text = ads.select("img").attr("data-srcset");
+          String[] sentences = text.split(", ");
+          news.setImgSrc(sentences[3]);
           news.setSource(Source.GHIZMODO.getSource());
           news.setScrapedDateTime(LocalDateTime.from(LocalDateTime.now()));
         }

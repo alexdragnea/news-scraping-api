@@ -2,7 +2,7 @@ server:
   port: 8888
 
 website:
-  urls: https://mashable.com/tech,https://gizmodo.com/
+  urls: https://mashable.com/tech,https://gizmodo.com/tech
 
 spring:
   datasource:

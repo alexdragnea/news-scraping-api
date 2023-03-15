@@ -32,7 +32,7 @@ public class ScrapeController {
     LOGGER.info("Inside of latestNews method of ScrapeController");
 
     if (StringUtils.isEmpty(keyword)) {
-      return ResponseEntity.ok(scraperService.findLatestNews(1, 20));
+      return ResponseEntity.ok(scraperService.findLatestNews(0, 15));
     }
 
     return ResponseEntity.ok(scraperService.findByKeyword(keyword));
