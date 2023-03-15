@@ -12,5 +12,5 @@ import java.util.List;
 public class ResponseBody {
 
   private List<News> news;
-  private Long totalCount;
+  private Long totalResults;
 }

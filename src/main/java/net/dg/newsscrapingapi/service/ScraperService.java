@@ -12,5 +12,5 @@ public interface ScraperService {
 
   List<News> findByKeyword(String keyword);
 
-  ResponseBody getNews();
+  ResponseBody getNews(int pageNmber, int size);
 }

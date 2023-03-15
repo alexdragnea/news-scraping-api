@@ -62,8 +62,11 @@ public class ScraperServiceImpl implements ScraperService {
   }
 
   @Override
-  public ResponseBody getNews() {
+  public ResponseBody getNews(int pageNmber, int size) {
 
-    return new ResponseBody(newsRepository.findAll(), newsRepository.count());
+    Page<News> page =
+            newsRepository.findAll(
+                    PageRequest.of(pageNmber, size, Sort.by(Sort.Direction.DESC, "scrapedDateTime")));
+    return new ResponseBody(page.getContent(), newsRepository.count());
   }
 }
