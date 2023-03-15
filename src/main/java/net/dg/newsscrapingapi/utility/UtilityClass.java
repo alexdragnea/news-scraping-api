@@ -5,8 +5,11 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import net.dg.newsscrapingapi.constants.Source;
 import net.dg.newsscrapingapi.model.News;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -19,19 +22,16 @@ public class UtilityClass {
     try {
       Document document = Jsoup.connect(url).get();
 
-      Element element =
-          document.getElementsByClass("sc-1kfqkp9-0 lboISa sc-1s9hjy6-0 llwBwG").first();
+      Element element = document.getElementsByClass("sc-17uq8ex-0 fakHlO").first();
 
       Elements elements = element.getElementsByTag("article");
       for (Element ads : elements) {
         News news = new News();
 
-        if (!isEmpty(ads.select("a").attr("title"))) {
-          news.setTitle(ads.select("a").attr("title"));
-          news.setUrl(ads.select("a").attr("href"));
-          String text = ads.select("img").attr("data-srcset");
-          String[] sentences = text.split(", ");
-          news.setImgSrc(sentences[3]);
+        if (!isEmpty(ads.select("img").attr("alt"))) {
+          news.setTitle(ads.select("img").attr("alt"));
+          news.setUrl(extractUrlFromGizmodo(ads.select("a").last().attr("data-ga")));
+          news.setImgSrc(ads.select("source").attr("data-srcset"));
           news.setSource(Source.GHIZMODO.getSource());
           news.setScrapedDateTime(LocalDateTime.from(LocalDateTime.now()));
         }
@@ -72,5 +72,15 @@ public class UtilityClass {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  public static String extractUrlFromGizmodo(String input) {
+    String pattern = "(https?://[^\"]+)";
+    Pattern regex = Pattern.compile(pattern);
+    Matcher matcher = regex.matcher(input);
+    if (matcher.find()) {
+      return matcher.group(1);
+    }
+    return StringUtils.EMPTY;
   }
 }
