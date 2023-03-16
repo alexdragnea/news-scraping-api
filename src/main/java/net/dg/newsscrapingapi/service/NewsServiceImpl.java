@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Service
-public class ScraperServiceImpl implements ScraperService {
+public class NewsServiceImpl implements NewsService {
 
   private final NewsRepository newsRepository;
 

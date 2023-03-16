@@ -4,7 +4,7 @@ import java.util.List;
 import net.dg.newsscrapingapi.model.News;
 import net.dg.newsscrapingapi.model.ResponseBody;
 
-public interface ScraperService {
+public interface NewsService {
 
   List<News> scrapeNews();
 
