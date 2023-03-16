@@ -10,7 +10,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -21,7 +21,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class UtilityClass {
 
-  public static void extractDataFromGizmodo(List<News> newsList, String url) {
+  public static void extractDataFromGizmodo(CopyOnWriteArrayList<News> newsList, String url) {
     try {
       Document document = Jsoup.connect(url).get();
       Element element = document.getElementsByClass("sc-17uq8ex-0 fakHlO").first();
@@ -42,9 +42,7 @@ public class UtilityClass {
                 news.setScrapedDateTime(LocalDateTime.now());
               }
               if (news.getUrl() != null) {
-                synchronized (newsList) {
-                  newsList.add(news);
-                }
+                newsList.add(news);
               }
             });
       }
@@ -57,7 +55,7 @@ public class UtilityClass {
     }
   }
 
-  public static void extractDataFromMashable(List<News> newsList, String url) {
+  public static void extractDataFromMashable(CopyOnWriteArrayList<News> newsList, String url) {
     try {
       Document document = Jsoup.connect(url).get();
       Element element = document.getElementsByClass("justify-center mt-8 w-full").first();
@@ -80,9 +78,7 @@ public class UtilityClass {
                 news.setScrapedDateTime(LocalDateTime.now());
               }
               if (news.getUrl() != null) {
-                synchronized (newsList) {
-                  newsList.add(news);
-                }
+                newsList.add(news);
               }
             });
       }
