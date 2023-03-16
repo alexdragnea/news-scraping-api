@@ -1,9 +1,5 @@
 package net.dg.newsscrapingapi.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.AllArgsConstructor;
 import net.dg.newsscrapingapi.model.News;
 import net.dg.newsscrapingapi.model.ResponseBody;
@@ -14,6 +10,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 @AllArgsConstructor
 @Service
@@ -26,7 +27,7 @@ public class NewsServiceImpl implements NewsService {
 
   @Override
   public List<News> scrapeNews() {
-    CopyOnWriteArrayList<News> newsList = new CopyOnWriteArrayList<>();
+    ConcurrentLinkedQueue<News> newsList = new ConcurrentLinkedQueue<>();
     List<News> uniqueNews = new ArrayList<>();
 
     for (String url : urls) {
