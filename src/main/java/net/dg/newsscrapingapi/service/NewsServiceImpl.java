@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
-
 import lombok.AllArgsConstructor;
 import net.dg.newsscrapingapi.model.News;
 import net.dg.newsscrapingapi.model.ResponseBody;
