@@ -1,14 +1,17 @@
 package net.dg.newsscrapingapi.rest;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import net.dg.newsscrapingapi.model.News;
-import net.dg.newsscrapingapi.model.ResponseBody;
 import net.dg.newsscrapingapi.service.NewsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -24,20 +27,5 @@ public class ScrapeController {
 
     LOGGER.info("Inside of scrapeNews method of ScrapeController");
     return ResponseEntity.ok(newsService.scrapeNews());
-  }
-
-  @GetMapping("/news")
-  public ResponseEntity<ResponseBody> getAllNews(@RequestParam String page) {
-    LOGGER.info("Inside of latestNews method of ScrapeController");
-
-    return ResponseEntity.ok(newsService.getNews(Integer.parseInt(page), 30));
-  }
-
-  @GetMapping("/news/search")
-  public ResponseEntity<ResponseBody> searchNews(@RequestParam String keyword) {
-
-    LOGGER.info("Inside of searchNews method of ScrapeController");
-
-    return ResponseEntity.ok(newsService.findByKeyword(keyword));
   }
 }
