@@ -14,21 +14,21 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class NewsController {
 
-    private final NewsService newsService;
-    private static final Logger LOGGER = LoggerFactory.getLogger(ScrapeController.class);
+  private final NewsService newsService;
+  private static final Logger LOGGER = LoggerFactory.getLogger(ScrapeController.class);
 
-    @GetMapping()
-    public ResponseEntity<ResponseBody> getAllNews(@RequestParam String page) {
-        LOGGER.info("Inside of getAllNews method of NewsController");
+  @GetMapping()
+  public ResponseEntity<ResponseBody> getAllNews(@RequestParam String page) {
+    LOGGER.info("Inside of getAllNews method of NewsController");
 
-        return ResponseEntity.ok(newsService.getNews(Integer.parseInt(page), 30));
-    }
+    return ResponseEntity.ok(newsService.getNews(Integer.parseInt(page), 30));
+  }
 
-    @GetMapping("/search")
-    public ResponseEntity<ResponseBody> searchNews(@RequestParam String keyword) {
+  @GetMapping("/search")
+  public ResponseEntity<ResponseBody> searchNews(@RequestParam String keyword) {
 
-        LOGGER.info("Inside of searchNews method of NewsController");
+    LOGGER.info("Inside of searchNews method of NewsController");
 
-        return ResponseEntity.ok(newsService.findByKeyword(keyword));
-    }
+    return ResponseEntity.ok(newsService.findByKeyword(keyword));
+  }
 }
