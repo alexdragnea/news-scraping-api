@@ -1,11 +1,10 @@
 package net.dg.newsscrapingapi.utility;
 
+import java.io.IOException;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import net.dg.newsscrapingapi.model.News;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 class UtilityClassTest {
 
@@ -19,8 +18,12 @@ class UtilityClassTest {
     ConcurrentLinkedQueue<News> mashableNewsList = new ConcurrentLinkedQueue<>();
     UtilityClass.extractDataFromGizmodo(gizmodoNewsList, GIZMODO_URL);
     UtilityClass.extractDataFromMashable(mashableNewsList, MASHABLE_URL);
-      Assertions.assertFalse(gizmodoNewsList.isEmpty());
-      Assertions.assertFalse(mashableNewsList.isEmpty());
+    Assertions.assertFalse(gizmodoNewsList.isEmpty());
+    Assertions.assertFalse(mashableNewsList.isEmpty());
   }
 
+  @Test
+  void testExtractGizmodoUrl() {
+    Assertions.assertFalse(UtilityClass.extractUrlFromGizmodo(GIZMODO_URL).isEmpty());
+  }
 }
