@@ -34,7 +34,7 @@ public class ScrapeController {
   }
 
   @GetMapping("/news/search")
-  public ResponseEntity<List<News>> searchNews(@RequestParam String keyword) {
+  public ResponseEntity<ResponseBody> searchNews(@RequestParam String keyword) {
 
     LOGGER.info("Inside of searchNews method of ScrapeController");
 

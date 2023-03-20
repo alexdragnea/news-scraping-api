@@ -8,7 +8,7 @@ public interface NewsService {
 
   List<News> scrapeNews();
 
-  List<News> findByKeyword(String keyword);
+  ResponseBody findByKeyword(String keyword);
 
   ResponseBody getNews(int pageNmber, int size);
 }
