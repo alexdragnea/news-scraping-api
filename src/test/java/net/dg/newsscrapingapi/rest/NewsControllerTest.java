@@ -1,6 +1,6 @@
 package net.dg.newsscrapingapi.rest;
 
-import net.dg.newsscrapingapi.helper.ResponseBodyObjectMother;
+import net.dg.newsscrapingapi.helper.ObjectMother;
 import net.dg.newsscrapingapi.service.NewsServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ class NewsControllerTest {
   void testGetAllNews() throws Exception {
 
     when(newsService.getNews(anyInt(), anyInt()))
-        .thenReturn(ResponseBodyObjectMother.buildResponseBody());
+        .thenReturn(ObjectMother.buildResponseBody());
 
     mockMvc
         .perform(
@@ -42,7 +42,7 @@ class NewsControllerTest {
   void testSearchNews() throws Exception {
 
     when(newsService.findByKeyword(anyString()))
-            .thenReturn(ResponseBodyObjectMother.buildResponseBody());
+            .thenReturn(ObjectMother.buildResponseBody());
 
     mockMvc
             .perform(

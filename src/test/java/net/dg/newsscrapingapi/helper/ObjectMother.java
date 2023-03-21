@@ -6,7 +6,7 @@ import net.dg.newsscrapingapi.model.ResponseBody;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class ResponseBodyObjectMother {
+public class ObjectMother {
 
   public static ResponseBody buildResponseBody() {
     return ResponseBody.builder()
