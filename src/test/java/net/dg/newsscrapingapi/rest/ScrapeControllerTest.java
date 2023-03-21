@@ -1,5 +1,10 @@
 package net.dg.newsscrapingapi.rest;
 
+import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import net.dg.newsscrapingapi.helper.ObjectMother;
 import net.dg.newsscrapingapi.repository.NewsRepository;
 import net.dg.newsscrapingapi.service.NewsServiceImpl;
@@ -12,37 +17,25 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-
 @WebMvcTest(ScrapeController.class)
 class ScrapeControllerTest {
 
-    @Autowired
-    MockMvc mockMvc;
+  @Autowired MockMvc mockMvc;
 
-    @Mock
-    private NewsRepository newsRepository;
+  @Mock private NewsRepository newsRepository;
 
-    @MockBean
-    private NewsServiceImpl newsService;
+  @MockBean private NewsServiceImpl newsService;
 
-    @Test
-    void testScrapeNews() throws Exception {
+  @Test
+  void testScrapeNews() throws Exception {
 
-        when(newsService.scrapeNews())
-                .thenReturn(ObjectMother.buildListNews());
+    when(newsService.scrapeNews()).thenReturn(ObjectMother.buildListNews());
 
-        mockMvc
-                .perform(
-                        MockMvcRequestBuilders.get("/api/v1/scrapenews")
-                                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(5)));
-    }
-
-
+    mockMvc
+        .perform(
+            MockMvcRequestBuilders.get("/api/v1/scrapenews")
+                .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$", hasSize(5)));
+  }
 }
