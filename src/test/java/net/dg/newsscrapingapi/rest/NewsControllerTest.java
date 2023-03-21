@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -35,5 +36,20 @@ class NewsControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.news").isNotEmpty())
         .andExpect(jsonPath("$.totalResults").value(5));
+  }
+
+  @Test
+  void testSearchNews() throws Exception {
+
+    when(newsService.findByKeyword(anyString()))
+            .thenReturn(ResponseBodyObjectMother.buildResponseBody());
+
+    mockMvc
+            .perform(
+                    MockMvcRequestBuilders.get("/api/v1/news/search?keyword=test")
+                            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.news").isNotEmpty())
+            .andExpect(jsonPath("$.totalResults").value(5));
   }
 }
