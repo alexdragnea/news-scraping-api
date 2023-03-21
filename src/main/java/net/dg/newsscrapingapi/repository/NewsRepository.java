@@ -13,6 +13,7 @@ public interface NewsRepository extends JpaRepository<News, Long> {
 
   Optional<News> getNewsByTitle(String title);
 
-  @Query(value = "SELECT * FROM news p WHERE p.title like %:keyword% ", nativeQuery = true)
+  @Query(value = "SELECT * FROM news p WHERE LOWER(p.title) like %:keyword% ", nativeQuery = true)
   List<News> findByKeyword(@Param("keyword") String keyword);
+
 }
