@@ -1,12 +1,12 @@
 
 website:
-  urls: https://mashable.com/tech,https://gizmodo.com/
+  urls: https://mashable.com/tech,https://gizmodo.com/tech/news
 
 spring:
   datasource:
-    url: toDo
-    username: toDo
-    password: toDo
+    url: jdbc:postgresql://scraper.cgo2b0cgqeqa.us-east-1.rds.amazonaws.com?useSSL=false
+    username: postgres
+    password: testdabase312
   jpa:
     properties:
       hibernate:

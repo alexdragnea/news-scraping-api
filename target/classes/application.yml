@@ -6,9 +6,9 @@ website:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/scraper
+    url: jdbc:postgresql://scraper.cgo2b0cgqeqa.us-east-1.rds.amazonaws.com/scraper?useSSL=false
     username: postgres
-    password: admin
+    password: testdabase312
   jpa:
     properties:
       hibernate:
