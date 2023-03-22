@@ -24,19 +24,35 @@ class NewsControllerTest {
   @MockBean private NewsServiceImpl newsService;
 
   @Test
-  void testGetAllNews() throws Exception {
+  void testGetAllNewsSortASC() throws Exception {
 
     when(newsService.getNews(anyInt(), anyInt(), anyString()))
         .thenReturn(ObjectMother.buildResponseBody());
 
     mockMvc
         .perform(
-            MockMvcRequestBuilders.get("/api/v1/news?page=0?order=DESC")
+            MockMvcRequestBuilders.get("/api/v1/news?page=0&order=ASC")
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.news").isNotEmpty())
         .andExpect(jsonPath("$.totalResults").value(5));
   }
+
+  @Test
+  void testGetAllNewsSortDESC() throws Exception {
+
+    when(newsService.getNews(anyInt(), anyInt(), anyString()))
+            .thenReturn(ObjectMother.buildResponseBody());
+
+    mockMvc
+            .perform(
+                    MockMvcRequestBuilders.get("/api/v1/news?page=0&order=DESC")
+                            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.news").isNotEmpty())
+            .andExpect(jsonPath("$.totalResults").value(5));
+  }
+
 
   @Test
   void testSearchNews() throws Exception {
