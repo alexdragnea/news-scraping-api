@@ -26,7 +26,8 @@ class NewsControllerTest {
   @Test
   void testGetAllNews() throws Exception {
 
-    when(newsService.getNews(anyInt(), anyInt(), anyString())).thenReturn(ObjectMother.buildResponseBody());
+    when(newsService.getNews(anyInt(), anyInt(), anyString()))
+        .thenReturn(ObjectMother.buildResponseBody());
 
     mockMvc
         .perform(
