@@ -1,19 +1,19 @@
 package net.dg.newsscrapingapi.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import lombok.AllArgsConstructor;
 import net.dg.newsscrapingapi.model.News;
 import net.dg.newsscrapingapi.model.ResponseBody;
 import net.dg.newsscrapingapi.repository.NewsRepository;
 import net.dg.newsscrapingapi.utility.UtilityClass;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 @AllArgsConstructor
 @Service
@@ -56,11 +56,22 @@ public class NewsServiceImpl implements NewsService {
   }
 
   @Override
-  public ResponseBody getNews(int pageNmber, int size) {
+  public ResponseBody getNews(int pageNmber, int size, String order) {
 
-    Page<News> page =
-        newsRepository.findAll(
-            PageRequest.of(pageNmber, size, Sort.by(Sort.Direction.DESC, "scrapedDateTime")));
-    return new ResponseBody(page.getContent(), newsRepository.count());
+    if (order.equalsIgnoreCase("DESC")) {
+      return new ResponseBody(
+          newsRepository
+              .findAll(
+                  PageRequest.of(pageNmber, size, Sort.by(Sort.Direction.DESC, "scrapedDateTime")))
+              .getContent(),
+          newsRepository.count());
+    }
+
+    return new ResponseBody(
+        newsRepository
+            .findAll(
+                PageRequest.of(pageNmber, size, Sort.by(Sort.Direction.ASC, "scrapedDateTime")))
+            .getContent(),
+        newsRepository.count());
   }
 }

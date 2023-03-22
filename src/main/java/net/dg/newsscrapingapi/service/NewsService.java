@@ -10,5 +10,5 @@ public interface NewsService {
 
   ResponseBody findByKeyword(String keyword);
 
-  ResponseBody getNews(int pageNmber, int size);
+  ResponseBody getNews(int pageNmber, int size, String order);
 }

@@ -18,10 +18,10 @@ public class NewsController {
   private static final Logger LOGGER = LoggerFactory.getLogger(ScrapeController.class);
 
   @GetMapping()
-  public ResponseEntity<ResponseBody> getAllNews(@RequestParam String page) {
+  public ResponseEntity<ResponseBody> getAllNews(@RequestParam String page, @RequestParam String order) {
     LOGGER.info("Inside of getAllNews method of NewsController");
 
-    return ResponseEntity.ok(newsService.getNews(Integer.parseInt(page), 30));
+    return ResponseEntity.ok(newsService.getNews(Integer.parseInt(page), 30, order));
   }
 
   @GetMapping("/search")

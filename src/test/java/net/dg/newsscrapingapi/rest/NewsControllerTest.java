@@ -26,11 +26,11 @@ class NewsControllerTest {
   @Test
   void testGetAllNews() throws Exception {
 
-    when(newsService.getNews(anyInt(), anyInt())).thenReturn(ObjectMother.buildResponseBody());
+    when(newsService.getNews(anyInt(), anyInt(), anyString())).thenReturn(ObjectMother.buildResponseBody());
 
     mockMvc
         .perform(
-            MockMvcRequestBuilders.get("/api/v1/news?page=0")
+            MockMvcRequestBuilders.get("/api/v1/news?page=0?order=DESC")
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.news").isNotEmpty())
