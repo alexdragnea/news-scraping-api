@@ -30,6 +30,7 @@ jobs:
         run: mvn clean install -DbumpMinor -Dmaven.test.skip
 
   tests:
+    permissions: write-all
     #Depends on test's job
     needs: mvn_build
     name: Unit & Mutation Tests
@@ -57,6 +58,7 @@ jobs:
         run: mvn -B test
 
   owasp:
+    permissions: write-all
     name: OWASP ZAP SCANS
     runs-on: ubuntu-latest
 
