@@ -29,31 +29,28 @@ jobs:
       - name: Run Maven Install amd Bump Version
         run: mvn clean install -DbumpMinor -Dmaven.test.skip
   unit-tests:
-    # Give the job a name
-    name: Run unit tests
-
-    # Define the runner operating system
+    #Depends on test's job
+    needs: mvn_build
+    name: Unit & Mutation Tests
+    #Run on Ubuntu using the latest version
     runs-on: ubuntu-latest
-
-    # Define the steps to run in the job
+    #Job's steps
     steps:
-      # Checkout the code from the repository
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      # Set up Java 11
-      - name: Set up Java 11
-        uses: actions/setup-java@v2
+      #Check-out your repository under $GITHUB_WORKSPACE, so your workflow can access it
+      - uses: actions/checkout@v1
+      #Set up JDK 11
+      - name: Set up JDK
+        uses: actions/setup-java@v1
         with:
           java-version: '11'
-
-      # Cache Maven packages to speed up builds
+      #Set up Maven cache
       - name: Cache Maven packages
-        uses: actions/cache@v2
+        #This action allows caching dependencies and build outputs to improve workflow execution time.
+        uses: actions/cache@v1
         with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-maven- }}
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
 
       # Install dependencies and compile the code
       - name: Build with Maven
