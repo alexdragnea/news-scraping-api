@@ -8,10 +8,7 @@ import net.dg.newsscrapingapi.model.ResponseBody;
 public class ObjectMother {
 
   public static ResponseBody buildResponseBody() {
-    return ResponseBody.builder()
-        .news(buildListNews())
-        .totalResults((long) buildListNews().size())
-        .build();
+    return ResponseBody.builder().news(buildListNews()).totalResults(5L).build();
   }
 
   public static List<News> buildListNews() {

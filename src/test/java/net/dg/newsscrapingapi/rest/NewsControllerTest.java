@@ -42,17 +42,16 @@ class NewsControllerTest {
   void testGetAllNewsSortDESC() throws Exception {
 
     when(newsService.getNews(anyInt(), anyInt(), anyString()))
-            .thenReturn(ObjectMother.buildResponseBody());
+        .thenReturn(ObjectMother.buildResponseBody());
 
     mockMvc
-            .perform(
-                    MockMvcRequestBuilders.get("/api/v1/news?page=0&order=DESC")
-                            .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.news").isNotEmpty())
-            .andExpect(jsonPath("$.totalResults").value(5));
+        .perform(
+            MockMvcRequestBuilders.get("/api/v1/news?page=0&order=DESC")
+                .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.news").isNotEmpty())
+        .andExpect(jsonPath("$.totalResults").value(5));
   }
-
 
   @Test
   void testSearchNews() throws Exception {

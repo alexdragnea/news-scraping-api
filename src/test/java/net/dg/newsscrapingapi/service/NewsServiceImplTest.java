@@ -1,31 +1,58 @@
 package net.dg.newsscrapingapi.service;
 
-import net.dg.newsscrapingapi.helper.ObjectMother;
-import net.dg.newsscrapingapi.model.ResponseBody;
-import net.dg.newsscrapingapi.repository.NewsRepository;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class NewsServiceImplTest {
+import java.util.List;
+import net.dg.newsscrapingapi.helper.ObjectMother;
+import net.dg.newsscrapingapi.model.News;
+import net.dg.newsscrapingapi.model.ResponseBody;
+import net.dg.newsscrapingapi.repository.NewsRepository;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
-  @MockBean NewsServiceImpl newsService;
-  @Mock NewsRepository newsRepository;
+@RunWith(MockitoJUnitRunner.class)
+@Profile("test")
+public class NewsServiceImplTest {
+
+  @Mock private NewsRepository newsRepository;
+  @InjectMocks private NewsServiceImpl newsService;
 
   @Test
-  void testGetNewsOrder() {
+  public void testGetNewsDescendingOrder() {
 
-    when(newsService.getNews(0, 1, "DESC")).thenReturn(ObjectMother.buildResponseBody());
+    List<News> expectedNewsList = ObjectMother.buildListNews();
+    when(newsRepository.findAll(any(PageRequest.class)))
+        .thenReturn(new PageImpl<>(expectedNewsList));
 
-    ResponseBody responseBody = newsService.getNews(0, 1, "DESC");
+    ResponseBody responseBody = newsService.getNews(1, 5, "DESC");
+    verify(newsRepository)
+        .findAll(PageRequest.of(1, 5, Sort.by(Sort.Direction.DESC, "scrapedDateTime")));
+    assertEquals(expectedNewsList, responseBody.getNews());
+    assertEquals(expectedNewsList.size(), responseBody.getNews().size());
+  }
 
-    Assertions.assertThat(responseBody.getNews()).hasSize(5);
+  @Test
+  public void testGetNewsAscendingOrder() {
+    List<News> expectedNewsList = ObjectMother.buildListNews();
+    when(newsRepository.findAll(any(PageRequest.class)))
+        .thenReturn(new PageImpl<>(expectedNewsList));
+
+    ResponseBody responseBody = newsService.getNews(1, 5, "ASC");
+
+    // Then
+    verify(newsRepository)
+        .findAll(PageRequest.of(1, 5, Sort.by(Sort.Direction.ASC, "scrapedDateTime")));
+    assertEquals(expectedNewsList, responseBody.getNews());
+    assertEquals(expectedNewsList.size(), responseBody.getNews().size());
   }
 }
