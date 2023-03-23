@@ -28,43 +28,40 @@ jobs:
       #Run mvn clean install and Bump Version
       - name: Run Maven Install amd Bump Version
         run: mvn clean install -DbumpMinor -Dmaven.test.skip
-  tests:
-    #Depends on test's job
-    needs: mvn_build
-    name: Unit Tests
-    #Run on Ubuntu using the latest version
+  unit-tests:
+    # Give the job a name
+    name: Run unit tests
+
+    # Define the runner operating system
     runs-on: ubuntu-latest
-    #Job's steps
+
+    # Define the steps to run in the job
     steps:
-      #Check-out your repository under $GITHUB_WORKSPACE, so your workflow can access it
-      - uses: actions/checkout@v1
-      #Set up JDK 11
-      - name: Set up JDK
-        uses: actions/setup-java@v1
+      # Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up Java 11
+      - name: Set up Java 11
+        uses: actions/setup-java@v2
         with:
           java-version: '11'
-      #Set up Maven cache
+
+      # Cache Maven packages to speed up builds
       - name: Cache Maven packages
-        #This action allows caching dependencies and build outputs to improve workflow execution time.
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-      # Start PostgreSQL container
-      - name: Start PostgreSQL
-        uses: docker://postgres
-        with:
-          # Set up a custom database and user with credentials
-          env: |
-            POSTGRES_DB=scraper
-            POSTGRES_USER=postgres
-            POSTGRES_PASSWORD=admin
-          # Expose PostgreSQL port
-          ports: |
-            5432:5432
-      - name: Run Unit Tests
-        run: mvn -B test
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven- }}
+
+      # Install dependencies and compile the code
+      - name: Build with Maven
+        run: mvn clean install
+
+      # Run the unit tests
+      - name: Run unit tests
+        run: mvn test
 
 #  tests:
 #    #Depends on test's job
