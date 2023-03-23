@@ -74,12 +74,12 @@ jobs:
       - name: Setup config
         run: |
           mkdir config
-          echo 'spring.datasource.url=jdbc:postgresql://localhost:5433/scraper' > config/application.yml
+          echo 'spring.datasource.url=jdbc:postgresql://postgres:5432/scraper' > config/application.yml
       #Run Tests
       - name: Run Unit Tests
         env:
           # Pass the PostgreSQL service port to the test command
-          DB_URL: jdbc:postgresql://localhost:5433/scraper
+          DB_URL: jdbc:postgresql://postgres:5432/scraper
         run: mvn -B test -Dspring.datasource.url=${{ env.DB_URL }}
 
 
