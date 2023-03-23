@@ -1,5 +1,7 @@
 package net.dg.newsscrapingapi.repository;
 
+import java.util.List;
+import java.util.Optional;
 import net.dg.newsscrapingapi.helper.ObjectMother;
 import net.dg.newsscrapingapi.model.News;
 import org.assertj.core.api.Assertions;
@@ -13,9 +15,6 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-
-import java.util.List;
-import java.util.Optional;
 
 @Testcontainers
 @DataJpaTest
