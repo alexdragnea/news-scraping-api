@@ -54,6 +54,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Run Unit Tests
         run: mvn -B test
+
 #  owasp:
 #    #Depends on sonar job
 #    needs: sonar
