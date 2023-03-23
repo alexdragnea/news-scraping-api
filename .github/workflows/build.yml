@@ -68,8 +68,8 @@ jobs:
       # Run PostgreSQL setup script
       - name: Run PostgreSQL setup script
         env:
-          # Pass the PostgreSQL service port to the setup script
           POSTGRES_PORT: ${{ job.services.postgres.ports['5432'] }}
+          POSTGRES_PASSWORD: admin # Set the password here
         run: |
           psql -h localhost -p $POSTGRES_PORT -U postgres -f setup.sql
       #Run Tests
