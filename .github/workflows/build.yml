@@ -65,13 +65,6 @@ jobs:
             5432:5432
       - name: Run Unit Tests
         run: mvn -B test
-      # Stop PostgreSQL container
-      - name: Stop PostgreSQL
-        uses: docker://postgres
-        with:
-          # Send SIGINT to gracefully shut down the container
-          entrypoint: [ "pg_ctl" ]
-          args: [ "-D", "/var/lib/postgresql/data", "stop" ]
 
 #  tests:
 #    #Depends on test's job
