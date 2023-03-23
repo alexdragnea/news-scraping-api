@@ -29,31 +29,13 @@ jobs:
       - name: Run Maven Install amd Bump Version
         run: mvn clean install -DbumpMinor -Dmaven.test.skip
 
+  #Test's job
   tests:
-    permissions: write-all
     #Depends on test's job
     needs: mvn_build
-    name: Unit Tests
+    name: Unit Testing
     #Run on Ubuntu using the latest version
     runs-on: ubuntu-latest
-    # Service containers to run with `container-job`
-    services:
-      # Label used to access the service container
-      postgres:
-        # Docker Hub image
-        image: postgres
-        # Provide the password for postgres
-        env:
-          POSTGRES_PASSWORD: admin
-          POSTGRES_USER: postgres
-          POSTGRES_DB: scraper
-          POSTGRES_HOST: localhost
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
     #Job's steps
     steps:
       #Check-out your repository under $GITHUB_WORKSPACE, so your workflow can access it
@@ -71,18 +53,9 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      # Run PostgreSQL setup script
-      - name: Setup config
-        run: |
-          mkdir config
-          echo 'spring.datasource.url=jdbc:postgresql://localhost:5432/scraper' > config/application.yml
-      #Run Tests
+      #Run Tests - mutation coverage (Threshold 80%)
       - name: Run Unit Tests
-        env:
-          # Pass the PostgreSQL service port to the test command
-          DB_URL: jdbc:postgresql://localhost:5432/scraper
-        run: mvn -B test -Dspring.datasource.url=${{ env.DB_URL }}
-
+        run: mvn -B test
 
   owasp:
     permissions: write-all
