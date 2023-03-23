@@ -79,7 +79,7 @@ jobs:
       - name: Run Unit Tests
         env:
           # Pass the PostgreSQL service port to the test command
-          DB_URL: jdbc:postgresql://localhost:${{ job.services.postgres.ports['5432'] }}/scraper
+          DB_URL: jdbc:postgresql://localhost:5432/scraper
         run: mvn -B test -Dspring.datasource.url=${{ env.DB_URL }}
 
 
