@@ -33,7 +33,7 @@ jobs:
     permissions: write-all
     #Depends on test's job
     needs: mvn_build
-    name: Unit & Mutation Tests
+    name: Unit Tests
     #Run on Ubuntu using the latest version
     runs-on: ubuntu-latest
     services:
