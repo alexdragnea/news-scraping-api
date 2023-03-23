@@ -15,13 +15,11 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 @RunWith(MockitoJUnitRunner.class)
-@Profile("test")
 public class NewsServiceImplTest {
 
   @Mock private NewsRepository newsRepository;

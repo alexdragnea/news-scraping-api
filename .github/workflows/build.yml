@@ -28,11 +28,12 @@ jobs:
       #Run mvn clean install and Bump Version
       - name: Run Maven Install amd Bump Version
         run: mvn clean install -DbumpMinor -Dmaven.test.skip
+
   #Test's job
   tests:
     #Depends on test's job
     needs: mvn_build
-    name: Unit Tests
+    name: Unit Testing
     #Run on Ubuntu using the latest version
     runs-on: ubuntu-latest
     #Job's steps
@@ -52,23 +53,26 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+      #Run Tests - mutation coverage (Threshold 80%)
       - name: Run Unit Tests
         run: mvn -B test
-#  owasp:
-#    #Depends on sonar job
-#    needs: sonar
-#    name: OWASP ZAP SCANS
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - uses: actions/checkout@v2
-#      - name: Building Docker Image
-#        run: docker-compose build
-#      - name: Launching the app
-#        run: docker-compose up --detach
-#
-#      - name: OWASP ZAP Baseline Scan
-#        uses: zaproxy/action-baseline@v0.7.0
-#        with:
-#          target: 'http://localhost:5000'
-#          issue_title: OWASP Security Testing
+
+  owasp:
+    permissions: write-all
+    name: OWASP ZAP SCANS
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Building Docker Image
+        run: docker-compose build
+      - name: Launching the app
+        run: docker-compose up --detach
+
+      - name: OWASP ZAP Full Scan
+        uses: zaproxy/action-full-scan@v0.4.0
+        with:
+          target: 'http://localhost:5000'
+          issue_title: OWASP Security Testing
+
+
