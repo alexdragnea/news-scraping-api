@@ -1,7 +1,5 @@
 package net.dg.newsscrapingapi.repository;
 
-import java.util.List;
-import java.util.Optional;
 import net.dg.newsscrapingapi.helper.ObjectMother;
 import net.dg.newsscrapingapi.model.News;
 import org.assertj.core.api.Assertions;
@@ -10,12 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.test.context.support.TestPropertySourceUtils;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import java.util.List;
+import java.util.Optional;
 
 @Testcontainers
 @DataJpaTest
@@ -23,20 +23,17 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 class NewsRepositoryTest {
 
   @Container
-  private static final PostgreSQLContainer<?> database =
-      new PostgreSQLContainer<>("postgres:12.9-alpine");
+  static PostgreSQLContainer postgresqlContainer =
+      new PostgreSQLContainer("postgres:11.1")
+          .withDatabaseName("scraper")
+          .withUsername("postgres")
+          .withPassword("admin");
 
-  public static class DataSourceInitializer
-      implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-
-    @Override
-    public void initialize(ConfigurableApplicationContext applicationContext) {
-      TestPropertySourceUtils.addInlinedPropertiesToEnvironment(
-          applicationContext,
-          "spring.datasource.url=" + database.getJdbcUrl(),
-          "spring.datasource.username=" + database.getUsername(),
-          "spring.datasource.password=" + database.getPassword());
-    }
+  @DynamicPropertySource
+  static void setProperties(DynamicPropertyRegistry registry) {
+    registry.add("spring.datasource.url", postgresqlContainer::getJdbcUrl);
+    registry.add("spring.datasource.username", postgresqlContainer::getUsername);
+    registry.add("spring.datasource.password", postgresqlContainer::getPassword);
   }
 
   @Autowired private NewsRepository newsRepository;
