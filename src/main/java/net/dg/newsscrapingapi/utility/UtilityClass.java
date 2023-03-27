@@ -1,12 +1,6 @@
 package net.dg.newsscrapingapi.utility;
 
-import net.dg.newsscrapingapi.constants.Source;
-import net.dg.newsscrapingapi.model.News;
-import org.apache.commons.lang3.StringUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -16,8 +10,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static org.apache.commons.lang3.StringUtils.isEmpty;
+import net.dg.newsscrapingapi.constants.Source;
+import net.dg.newsscrapingapi.model.News;
+import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class UtilityClass {
 
@@ -71,7 +70,7 @@ public class UtilityClass {
               News news = new News();
 
               if (!isEmpty(ads.select("img").attr("alt"))) {
-                news.setTitle((ads.select("img").attr("alt")).substring(21));
+                news.setTitle((ads.select("img").attr("alt")));
                 news.setUrl(extractUrlFromGizmodo(ads.select("a").last().attr("href")));
                 news.setImgSrc(ads.select("img").attr("data-src"));
                 news.setSource(Source.MEDIAFAX.getSource());

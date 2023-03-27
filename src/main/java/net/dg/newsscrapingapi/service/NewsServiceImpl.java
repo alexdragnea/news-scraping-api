@@ -35,8 +35,8 @@ public class NewsServiceImpl implements NewsService {
         UtilityClass.extractDataFromMashable(newsList, url);
       } else if (url.contains("gizmodo")) {
         UtilityClass.extractDataFromGizmodo(newsList, url);
-      } else if (url.contains("mediafax")){
-        UtilityClass.extractDataFromMediafax(newsList,  url);
+      } else if (url.contains("mediafax")) {
+        UtilityClass.extractDataFromMediafax(newsList, url);
       }
     }
 
