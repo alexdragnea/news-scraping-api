@@ -70,7 +70,7 @@ public class UtilityClass {
               News news = new News();
 
               if (!isEmpty(ads.select("img").attr("alt"))) {
-                news.setTitle((ads.select("img").attr("alt")));
+                news.setTitle((ads.select("img").attr("alt")).substring(21));
                 news.setUrl(extractUrlFromGizmodo(ads.select("a").last().attr("href")));
                 news.setImgSrc(ads.select("img").attr("data-src"));
                 news.setSource(Source.MEDIAFAX.getSource());
