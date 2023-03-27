@@ -2,7 +2,7 @@ server:
   port: 5000
 
 website:
-  urls: https://mashable.com/tech,https://gizmodo.com/tech/news
+  urls: https://mashable.com/tech,https://gizmodo.com/tech/news, https://www.mediafax.ro/tehnologie/
 
 spring:
   datasource:
