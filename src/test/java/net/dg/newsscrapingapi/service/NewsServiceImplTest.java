@@ -1,6 +1,7 @@
 package net.dg.newsscrapingapi.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -13,7 +14,10 @@ import net.dg.newsscrapingapi.repository.NewsRepository;
 import net.dg.newsscrapingapi.utility.UtilityClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -37,6 +41,8 @@ public class NewsServiceImplTest {
         .findAll(PageRequest.of(1, 5, Sort.by(Sort.Direction.DESC, "scrapedDateTime")));
     assertEquals(expectedNewsList, responseBody.getNews());
     assertEquals(expectedNewsList.size(), responseBody.getNews().size());
+
+    assertThrows(IllegalArgumentException.class, () -> newsService.getNews(-1, 5, "DESC"));
   }
 
   @Test
