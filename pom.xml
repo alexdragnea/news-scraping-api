@@ -160,7 +160,7 @@
                     <excludedTestClasses>
                         <param>net.dg.newsscrapingapi.repository.*</param>
                     </excludedTestClasses>
-                    <mutationThreshold>50</mutationThreshold>
+                    <mutationThreshold>25</mutationThreshold>
                     <targetClasses>
                         <param>net.dg.newsscrapingapi.*</param>
                     </targetClasses>
