@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import net.dg.newsscrapingapi.helper.ObjectMother;
+import net.dg.newsscrapingapi.model.ResponseBody;
 import net.dg.newsscrapingapi.service.NewsServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,5 +66,19 @@ class NewsControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.news").isNotEmpty())
         .andExpect(jsonPath("$.totalResults").value(5));
+  }
+
+  @Test
+  void testSearchNewsNothingFound() throws Exception {
+
+    when(newsService.findByKeyword(anyString())).thenReturn(new ResponseBody());
+
+    mockMvc
+        .perform(
+            MockMvcRequestBuilders.get("/api/v1/news/search?keyword=test")
+                .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.news").isEmpty())
+        .andExpect(jsonPath("$.totalResults").doesNotExist());
   }
 }
