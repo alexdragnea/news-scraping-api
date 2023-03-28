@@ -74,11 +74,11 @@ class NewsControllerTest {
     when(newsService.findByKeyword(anyString())).thenReturn(new ResponseBody());
 
     mockMvc
-            .perform(
-                    MockMvcRequestBuilders.get("/api/v1/news/search?keyword=test")
-                            .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.news").isEmpty())
-            .andExpect(jsonPath("$.totalResults").doesNotExist());
+        .perform(
+            MockMvcRequestBuilders.get("/api/v1/news/search?keyword=test")
+                .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.news").isEmpty())
+        .andExpect(jsonPath("$.totalResults").doesNotExist());
   }
 }
