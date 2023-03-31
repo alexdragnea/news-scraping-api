@@ -37,6 +37,8 @@ public class NewsServiceImpl implements NewsService {
         UtilityClass.extractDataFromGizmodo(newsList, url);
       } else if (url.contains("mediafax")) {
         UtilityClass.extractDataFromMediafax(newsList, url);
+      } else if (url.contains("galaxy-tech")) {
+        UtilityClass.extractDataFromGalaxyTech(newsList, url);
       }
     }
 

@@ -37,7 +37,7 @@ public class UtilityClass {
 
               if (!isEmpty(ads.select("img").attr("alt"))) {
                 news.setTitle(ads.select("img").attr("alt"));
-                news.setUrl(extractUrlFromGizmodo(ads.select("a").last().attr("data-ga")));
+                news.setUrl(extractUrl(ads.select("a").last().attr("data-ga")));
                 news.setImgSrc(ads.select("source").attr("data-srcset"));
                 news.setSource(Source.GHIZMODO.getSource());
                 news.setScrapedDateTime(LocalDateTime.now());
@@ -71,7 +71,7 @@ public class UtilityClass {
 
               if (!isEmpty(ads.select("img").attr("alt"))) {
                 news.setTitle((ads.select("img").attr("alt")).substring(21));
-                news.setUrl(extractUrlFromGizmodo(ads.select("a").last().attr("href")));
+                news.setUrl(extractUrl(ads.select("a").last().attr("href")));
                 news.setImgSrc(ads.select("img").attr("data-src"));
                 news.setSource(Source.MEDIAFAX.getSource());
                 news.setScrapedDateTime(LocalDateTime.now());
@@ -126,7 +126,42 @@ public class UtilityClass {
     }
   }
 
-  public static String extractUrlFromGizmodo(String input) {
+  public static void extractDataFromGalaxyTech(ConcurrentLinkedQueue<News> newsList, String url) {
+    try {
+      Document document = Jsoup.connect(url).get();
+      Element element = document.getElementsByClass("content-area").first();
+      Elements elements = element.getElementsByTag("article");
+
+      ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
+
+      for (Element ads : elements) {
+        executorService.submit(
+            () -> {
+              News news = new News();
+
+              if (!isEmpty(ads.select("a").first().text())) {
+                news.setTitle(ads.select("a").first().text());
+                news.setUrl(extractUrl(ads.select("a").last().attr("href")));
+                String imgSrc = ads.select("img").attr("srcset");
+                news.setImgSrc(imgSrc.substring(0, imgSrc.indexOf(" ")));
+                news.setSource(Source.GALAXYTECH.getSource());
+                news.setScrapedDateTime(LocalDateTime.now());
+              }
+              if (news.getUrl() != null) {
+                newsList.offer(news);
+              }
+            });
+      }
+
+      executorService.shutdown();
+      executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+
+    } catch (IOException | InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static String extractUrl(String input) {
     String pattern = "(https?://[^\"]+)";
     Pattern regex = Pattern.compile(pattern);
     Matcher matcher = regex.matcher(input);
