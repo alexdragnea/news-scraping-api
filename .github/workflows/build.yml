@@ -59,7 +59,7 @@ jobs:
 
   #Test's job
   performance-test:
-    needs: tests
+#    needs: tests
     name: Performance Testing
     runs-on: ubuntu-latest
     steps:
@@ -78,7 +78,7 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Build with Maven
+      - name: Clean package
         run: mvn clean package
       - name: Run Performance Testing for NewsController
         run: mvn gatling:test -Dgatling.simulationClass=net.dg.newsscrapingapi.performance.NewsControllerPerformanceTesting
