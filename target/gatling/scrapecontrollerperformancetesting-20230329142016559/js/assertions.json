@@ -1,0 +1,10 @@
+{
+  "simulation": "net.dg.newsscrapingapi.performance.ScrapeControllerPerformanceTesting",
+  "simulationId": "scrapecontrollerperformancetesting-20230329142016559",
+  "start": 1680099617980,
+  "description": "",
+  "scenarios": ["Scrape News Simulation"],
+  "assertions": [
+
+  ]
+}

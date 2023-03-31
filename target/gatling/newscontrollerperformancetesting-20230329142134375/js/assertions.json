@@ -1,0 +1,10 @@
+{
+  "simulation": "net.dg.newsscrapingapi.performance.NewsControllerPerformanceTesting",
+  "simulationId": "newscontrollerperformancetesting-20230329142134375",
+  "start": 1680099695715,
+  "description": "",
+  "scenarios": ["Get all news simulation"],
+  "assertions": [
+
+  ]
+}

@@ -1,0 +1,10 @@
+net\dg\newsscrapingapi\helper\ObjectMother.class
+net\dg\newsscrapingapi\rest\ScrapeControllerTest.class
+net\dg\newsscrapingapi\repository\NewsRepositoryTest$DataSourceInitializer.class
+net\dg\newsscrapingapi\performance\NewsControllerPerformanceTesting.class
+net\dg\newsscrapingapi\utility\UtilityClassTest.class
+net\dg\newsscrapingapi\repository\NewsRepositoryTest.class
+net\dg\newsscrapingapi\NewsScrapingApiApplicationTests.class
+net\dg\newsscrapingapi\performance\ScrapeControllerPerformanceTesting.class
+net\dg\newsscrapingapi\rest\NewsControllerTest.class
+net\dg\newsscrapingapi\service\NewsServiceImplTest.class

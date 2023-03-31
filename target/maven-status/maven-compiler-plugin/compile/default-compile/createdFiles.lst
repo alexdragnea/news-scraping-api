@@ -1,0 +1,11 @@
+net\dg\newsscrapingapi\service\NewsServiceImpl.class
+net\dg\newsscrapingapi\rest\NewsController.class
+net\dg\newsscrapingapi\model\News.class
+net\dg\newsscrapingapi\model\ResponseBody.class
+net\dg\newsscrapingapi\rest\ScrapeController.class
+net\dg\newsscrapingapi\repository\NewsRepository.class
+net\dg\newsscrapingapi\constants\Source.class
+net\dg\newsscrapingapi\service\NewsService.class
+net\dg\newsscrapingapi\NewsScrapingApiApplication.class
+net\dg\newsscrapingapi\model\ResponseBody$ResponseBodyBuilder.class
+net\dg\newsscrapingapi\utility\UtilityClass.class
