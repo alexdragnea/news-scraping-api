@@ -85,7 +85,6 @@ jobs:
       - name: Publish NewsController Reports to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           publish_dir: target/gatling/newscontroller
       - name: Sleep for 10 seconds
         run: sleep 10s
@@ -94,7 +93,6 @@ jobs:
       - name: Publish ScrapeController Reports to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           publish_dir: target/gatling/scrapecontroller
 
   owasp:
