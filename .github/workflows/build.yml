@@ -57,6 +57,34 @@ jobs:
       - name: Run Unit Tests
         run: mvn -B test
 
+  #Test's job
+  performance-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+      - name: Build with Maven
+        run: mvn clean package
+      - name: Run Performance Testing for NewsController
+        run: mvn gatling:test -Dgatling.simulationClass=net.dg.newsscrapingapi.performance.NewsControllerPerformanceTesting
+      - name: Publish NewsController Reports to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          publish_dir: target/gatling/newscontroller
+      - name: Sleep for 10 seconds
+        run: sleep 10s
+      - name: Run Performance Testing for ScrapeController
+        run: mvn gatling:test -Dgatling.simulationClass=net.dg.newsscrapingapi.performance.ScrapeControllerPerformanceTesting
+      - name: Publish ScrapeController Reports to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          publish_dir: target/gatling/scrapecontroller
+
   owasp:
     permissions: write-all
     name: OWASP ZAP SCANS
