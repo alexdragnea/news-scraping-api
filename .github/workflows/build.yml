@@ -83,7 +83,7 @@ jobs:
         run: mvn gatling:test -Dgatling.simulationClass=net.dg.newsscrapingapi.performance.NewsControllerPerformanceTesting
         working-directory: .
       - name: Publish NewsController Reports
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           personal_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           publish_dir: target/gatling/newscontroller
@@ -95,7 +95,7 @@ jobs:
         run: mvn gatling:test -Dgatling.simulationClass=net.dg.newsscrapingapi.performance.ScrapeControllerPerformanceTesting
         working-directory: .
       - name: Publish ScrapeController Reports
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           personal_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           publish_dir: target/gatling/scrapecontroller
