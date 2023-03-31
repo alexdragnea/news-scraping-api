@@ -93,6 +93,12 @@
             <artifactId>commons-collections4</artifactId>
             <version>4.4</version>
         </dependency>
+        <dependency>
+            <groupId>io.gatling.highcharts</groupId>
+            <artifactId>gatling-charts-highcharts</artifactId>
+            <version>3.8.3</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -144,6 +150,15 @@
                         <exclude>net/dg/newsscrapingapi/model/**</exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-maven-plugin</artifactId>
+                <version>4.2.4</version>
+                <!--                <configuration>-->
+                <!--                <simulationClass>net.dg.newsscrapingapi.performance.NewsControllerPerformanceTesting</simulationClass>-->
+                <!--                <simulationClass>net.dg.newsscrapingapi.performance.ScrapeControllerPerformanceTesting</simulationClass>-->
+                <!--                </configuration>-->
             </plugin>
             <plugin>
                 <groupId>org.pitest</groupId>
