@@ -3,7 +3,8 @@ package net.dg.newsscrapingapi.constants;
 public enum Source {
   GHIZMODO("Ghizmodo.com"),
   MASHABLE("Mashable.com"),
-  MEDIAFAX("Mediafax.ro");
+  MEDIAFAX("Mediafax.ro"),
+  GALAXYTECH("Galaxy-tech.ro");
 
   private String source;
 
