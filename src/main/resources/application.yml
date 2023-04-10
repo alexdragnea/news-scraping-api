@@ -6,7 +6,7 @@ website:
 
 api:
   http:
-   auth-token-header-name: x-api-key
+   auth-token-header-name: api-key
    auth-token: addb082f-e940-4bc7-acec-060fe4434ded
 
 spring:
