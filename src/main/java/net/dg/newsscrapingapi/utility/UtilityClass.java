@@ -1,15 +1,5 @@
 package net.dg.newsscrapingapi.utility;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import net.dg.newsscrapingapi.constants.Source;
 import net.dg.newsscrapingapi.model.News;
 import org.apache.commons.lang3.StringUtils;
@@ -18,8 +8,22 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+
 public class UtilityClass {
 
+  private static final DateTimeFormatter formatter =
+      DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
   private static final int THREAD_POOL_SIZE = 5;
 
   public static void extractDataFromGizmodo(ConcurrentLinkedQueue<News> newsList, String url) {
@@ -40,7 +44,7 @@ public class UtilityClass {
                 news.setUrl(extractUrl(ads.select("a").last().attr("data-ga")));
                 news.setImgSrc(ads.select("source").attr("data-srcset"));
                 news.setSource(Source.GHIZMODO.getSource());
-                news.setScrapedDateTime(LocalDateTime.now());
+                news.setScrapedDateTime(extractLocalDateTime());
               }
               if (news.getUrl() != null) {
                 newsList.offer(news);
@@ -74,7 +78,7 @@ public class UtilityClass {
                 news.setUrl(extractUrl(ads.select("a").last().attr("href")));
                 news.setImgSrc(ads.select("img").attr("data-src"));
                 news.setSource(Source.MEDIAFAX.getSource());
-                news.setScrapedDateTime(LocalDateTime.now());
+                news.setScrapedDateTime(extractLocalDateTime());
               }
               if (news.getUrl() != null) {
                 newsList.offer(news);
@@ -110,7 +114,7 @@ public class UtilityClass {
                 news.setUrl("https://mashable.com" + ads.select("a").attr("href"));
                 news.setImgSrc(ads.select("img").attr("src"));
                 news.setSource(Source.MASHABLE.getSource());
-                news.setScrapedDateTime(LocalDateTime.now());
+                news.setScrapedDateTime(extractLocalDateTime());
               }
               if (news.getUrl() != null) {
                 newsList.offer(news);
@@ -145,7 +149,7 @@ public class UtilityClass {
                 String imgSrc = ads.select("img").attr("srcset");
                 news.setImgSrc(imgSrc.substring(0, imgSrc.indexOf(" ")));
                 news.setSource(Source.GALAXYTECH.getSource());
-                news.setScrapedDateTime(LocalDateTime.now());
+                news.setScrapedDateTime(extractLocalDateTime());
               }
               if (news.getUrl() != null) {
                 newsList.offer(news);
@@ -169,5 +173,11 @@ public class UtilityClass {
       return matcher.group(1);
     }
     return StringUtils.EMPTY;
+  }
+
+  public static LocalDateTime extractLocalDateTime() {
+    LocalDateTime now = LocalDateTime.now();
+    String formattedDate = now.format(formatter);
+    return LocalDateTime.parse(formattedDate, formatter);
   }
 }
