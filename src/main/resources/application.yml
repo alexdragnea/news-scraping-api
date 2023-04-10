@@ -2,7 +2,7 @@ server:
   port: 5000
 
 website:
-  urls: https://mashable.com/tech,https://gizmodo.com/tech/news, https://www.mediafax.ro/tehnologie/
+  urls: https://mashable.com/tech,https://gizmodo.com/tech/news, https://www.mediafax.ro/tehnologie/, https://www.galaxy-tech.ro/category/stiri-tehnologie/
 
 spring:
   datasource:
