@@ -105,6 +105,16 @@
             <version>3.8.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>5.4.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.4.5</version>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -154,6 +164,8 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>net.dg.newsscrapingapi.model.*.*</exclude>
+                                        <exclude>net.dg.newsscrapingapi.auth.*.*</exclude>
+                                        <exclude>net.dg.newsscrapingapi.config.*.*</exclude>
                                         <exclude>net.dg.newsscrapingapi.NewsScrapingApiApplication</exclude>
                                     </excludes>
                                     <limits>
@@ -176,6 +188,8 @@
                         <configuration>
                             <excludes>
                                 <exclude>net/dg/newsscrapingapi/model/*</exclude>
+                                <exclude>net/dg/newsscrapingapi/config/*</exclude>
+                                <exclude>net/dg/newsscrapingapi/auth/*</exclude>
                                 <exclude>net/dg/springrestweather/NewsScrapingApiApplication*</exclude>
                             </excludes>
                         </configuration>
