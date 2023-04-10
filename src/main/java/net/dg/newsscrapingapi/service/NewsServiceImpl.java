@@ -1,8 +1,9 @@
 package net.dg.newsscrapingapi.service;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import lombok.AllArgsConstructor;
 import net.dg.newsscrapingapi.model.News;
@@ -26,7 +27,7 @@ public class NewsServiceImpl implements NewsService {
   @Override
   public List<News> scrapeNews() {
     ConcurrentLinkedQueue<News> newsList = new ConcurrentLinkedQueue<>();
-    List<News> uniqueNews = new ArrayList<>();
+    Set<News> uniqueNews = new HashSet<>();
 
     for (String url : urls) {
 
