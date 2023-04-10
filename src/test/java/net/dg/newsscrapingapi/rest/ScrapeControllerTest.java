@@ -34,6 +34,7 @@ class ScrapeControllerTest {
     mockMvc
         .perform(
             MockMvcRequestBuilders.get("/api/v1/scrapenews")
+                .header("api-key", "addb082f-e940-4bc7-acec-060fe4434ded")
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(5)));

@@ -33,6 +33,7 @@ class NewsControllerTest {
     mockMvc
         .perform(
             MockMvcRequestBuilders.get("/api/v1/news?page=0&order=ASC")
+                .header("api-key", "addb082f-e940-4bc7-acec-060fe4434ded")
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.news").isNotEmpty())
@@ -48,6 +49,7 @@ class NewsControllerTest {
     mockMvc
         .perform(
             MockMvcRequestBuilders.get("/api/v1/news?page=0&order=DESC")
+                .header("api-key", "addb082f-e940-4bc7-acec-060fe4434ded")
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.news").isNotEmpty())
@@ -62,6 +64,7 @@ class NewsControllerTest {
     mockMvc
         .perform(
             MockMvcRequestBuilders.get("/api/v1/news/search?keyword=test")
+                .header("api-key", "addb082f-e940-4bc7-acec-060fe4434ded")
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.news").isNotEmpty())
@@ -76,6 +79,7 @@ class NewsControllerTest {
     mockMvc
         .perform(
             MockMvcRequestBuilders.get("/api/v1/news/search?keyword=test")
+                .header("api-key", "addb082f-e940-4bc7-acec-060fe4434ded")
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.news").isEmpty())
