@@ -42,7 +42,7 @@ public class ArticleCleanUpService {
             httpClient.send(request, HttpResponse.BodyHandlers.discarding());
         if (response.statusCode() == 404) {
           newsRepository.delete(news);
-          LOGGER.info("ArticleCleanUpService: error non-existent article: {}", news.getTitle());
+          LOGGER.info("ArticleCleanUpService: deleting non-existent article: {}", news.getTitle());
         }
       } catch (IOException | InterruptedException e) {
         LOGGER.error("ArticleCleanUpService: error checking article: {}", news.getTitle(), e);
