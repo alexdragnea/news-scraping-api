@@ -88,7 +88,7 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=alexdragnea_spring-rest-weather-app
 
   owasp:
-    needs: tests
+    needs: sonar
     permissions: write-all
     name: OWASP ZAP SCANS
     runs-on: ubuntu-latest
