@@ -1,6 +1,12 @@
 package net.dg.newsscrapingapi.utility;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
+import net.dg.newsscrapingapi.constants.Source;
+import net.dg.newsscrapingapi.model.News;
+import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -11,15 +17,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import net.dg.newsscrapingapi.constants.Source;
-import net.dg.newsscrapingapi.model.News;
-import org.apache.commons.lang3.StringUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class UtilityClass {
+
+  private UtilityClass() {}
 
   private static final DateTimeFormatter formatter =
       DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
