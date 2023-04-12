@@ -38,8 +38,6 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
         });
     httpSecurity
         .antMatcher("/api/**")
-        .csrf()
-        .disable()
         .addFilter(filter)
         .authorizeRequests()
         .anyRequest()
