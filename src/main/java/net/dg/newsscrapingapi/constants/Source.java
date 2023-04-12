@@ -6,13 +6,13 @@ public enum Source {
   MEDIAFAX("Mediafax.ro"),
   GALAXYTECH("Galaxy-tech.ro");
 
-  private String source;
+  private final String sourceName;
 
-  public String getSource() {
-    return this.source;
+  public String getSourceName() {
+    return this.sourceName;
   }
 
-  private Source(String source) {
-    this.source = source;
+  Source(String sourceName) {
+    this.sourceName = sourceName;
   }
 }

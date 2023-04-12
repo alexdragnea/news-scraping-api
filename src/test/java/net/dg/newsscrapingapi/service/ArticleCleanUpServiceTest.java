@@ -23,7 +23,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ContextConfiguration(initializers = ArticleCleanUpServiceTest.DataSourceInitializer.class)
 @ComponentScan(basePackages = "net.dg.newsscrapingapi.service")
-public class ArticleCleanUpServiceTest {
+class ArticleCleanUpServiceTest {
 
   @Autowired private ArticleCleanUpService articleCleanUpService;
 
@@ -47,15 +47,15 @@ public class ArticleCleanUpServiceTest {
   @Autowired private NewsRepository newsRepository;
 
   @Test
-  public void testCleanUpArticles() {
+  void testCleanUpArticles() {
     News news1 = new News();
     news1.setTitle("Test Article 1");
-    news1.setUrl("http://example.com/test1");
+    news1.setUrl("https://example.com/test1");
     newsRepository.save(news1);
 
     News news2 = new News();
     news2.setTitle("Test Article 2");
-    news2.setUrl("http://example.com/test2");
+    news2.setUrl("https://example.com/test2");
     newsRepository.save(news2);
 
     articleCleanUpService.removeNonExistentArticles();

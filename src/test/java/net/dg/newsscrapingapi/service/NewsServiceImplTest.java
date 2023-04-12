@@ -2,7 +2,7 @@ package net.dg.newsscrapingapi.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -21,13 +21,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 @ExtendWith(MockitoExtension.class)
-public class NewsServiceImplTest {
+class NewsServiceImplTest {
 
   @Mock private NewsRepository newsRepository;
   @InjectMocks private NewsServiceImpl newsService;
 
   @Test
-  public void testGetNewsDescendingOrder() {
+  void testGetNewsDescendingOrder() {
 
     List<News> expectedNewsList = ObjectMother.buildListNews();
     when(newsRepository.findAll(any(PageRequest.class)))
@@ -43,7 +43,7 @@ public class NewsServiceImplTest {
   }
 
   @Test
-  public void testGetNewsAscendingOrder() {
+  void testGetNewsAscendingOrder() {
     List<News> expectedNewsList = ObjectMother.buildListNews();
     when(newsRepository.findAll(any(PageRequest.class)))
         .thenReturn(new PageImpl<>(expectedNewsList));
@@ -58,7 +58,7 @@ public class NewsServiceImplTest {
   }
 
   @Test
-  public void testFindByKeyword() {
+  void testFindByKeyword() {
     List<News> expectedNewsList = ObjectMother.buildListNews();
     when(newsRepository.findByKeyword(any(String.class))).thenReturn(expectedNewsList);
 

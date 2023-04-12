@@ -1,10 +1,11 @@
 package net.dg.newsscrapingapi.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 import java.util.Optional;
 import net.dg.newsscrapingapi.helper.ObjectMother;
 import net.dg.newsscrapingapi.model.News;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ class NewsRepositoryTest {
     Optional<News> existingNews =
         newsRepository.getNewsByTitle(ObjectMother.buildListNews().get(0).getTitle());
 
-    Assertions.assertThat(existingNews.get().getTitle()).isEqualTo("Spring Starts Here");
+    assertThat(existingNews.get().getTitle()).isEqualTo("Spring Starts Here");
   }
 
   @Test
@@ -63,6 +64,6 @@ class NewsRepositoryTest {
 
     List<News> existingNews = newsRepository.findByKeyword("iphone");
 
-    Assertions.assertThat(existingNews.size()).isEqualTo(1);
+    assertThat(existingNews).hasSize(1);
   }
 }

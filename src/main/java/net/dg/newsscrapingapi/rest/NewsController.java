@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.*;
 public class NewsController {
 
   private final NewsService newsService;
-  private static final Logger LOGGER = LoggerFactory.getLogger(ScrapeController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(NewsController.class);
 
   @GetMapping()
   public ResponseEntity<ResponseBody> getAllNews(
       @RequestParam String page, @RequestParam String order) {
-    LOGGER.info("Inside of getAllNews method of NewsController");
+    LOGGER.info("NewsController: requesting news of page {}, ordering {}", page, order);
 
     return ResponseEntity.ok(newsService.getNews(Integer.parseInt(page), 30, order));
   }
@@ -28,7 +28,7 @@ public class NewsController {
   @GetMapping("/search")
   public ResponseEntity<ResponseBody> searchNews(@RequestParam String keyword) {
 
-    LOGGER.info("Inside of searchNews method of NewsController");
+    LOGGER.info("NewsController: requesting news for keyword {}", keyword);
 
     return ResponseEntity.ok(newsService.findByKeyword(keyword));
   }

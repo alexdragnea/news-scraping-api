@@ -12,6 +12,11 @@ import org.springframework.stereotype.Component;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsConfiguration implements Filter {
 
+  @Override
+  public void init(FilterConfig filterConfig) {
+    // This method intentionally left empty.
+  }
+
   public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
       throws IOException, ServletException {
     HttpServletResponse response = (HttpServletResponse) res;
@@ -27,7 +32,8 @@ public class CorsConfiguration implements Filter {
     }
   }
 
-  public void init(FilterConfig filterConfig) {}
-
-  public void destroy() {}
+  @Override
+  public void destroy() {
+    // This method intentionally left empty.
+  }
 }

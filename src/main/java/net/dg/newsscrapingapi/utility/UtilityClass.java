@@ -5,7 +5,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.Queue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +25,7 @@ public class UtilityClass {
       DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
   private static final int THREAD_POOL_SIZE = 5;
 
-  public static void extractDataFromGizmodo(ConcurrentLinkedQueue<News> newsList, String url) {
+  public static void extractDataFromGizmodo(Queue<News> newsList, String url) {
     try {
       Document document = Jsoup.connect(url).get();
       Element element = document.getElementsByClass("sc-17uq8ex-0 fakHlO").first();
@@ -42,7 +42,7 @@ public class UtilityClass {
                 news.setTitle(ads.select("img").attr("alt"));
                 news.setUrl(extractUrl(ads.select("a").last().attr("data-ga")));
                 news.setImgSrc(ads.select("source").attr("data-srcset"));
-                news.setSource(Source.GHIZMODO.getSource());
+                news.setSource(Source.GHIZMODO.getSourceName());
                 news.setScrapedDateTime(extractLocalDateTime());
               }
               if (news.getUrl() != null) {
@@ -56,10 +56,11 @@ public class UtilityClass {
 
     } catch (IOException | InterruptedException e) {
       e.printStackTrace();
+      Thread.currentThread().interrupt();
     }
   }
 
-  public static void extractDataFromMediafax(ConcurrentLinkedQueue<News> newsList, String url) {
+  public static void extractDataFromMediafax(Queue<News> newsList, String url) {
     try {
       Document document = Jsoup.connect(url).get();
       Element element = document.getElementsByClass("intros").first();
@@ -76,7 +77,7 @@ public class UtilityClass {
                 news.setTitle((ads.select("img").attr("alt")).substring(21));
                 news.setUrl(extractUrl(ads.select("a").last().attr("href")));
                 news.setImgSrc(ads.select("img").attr("data-src"));
-                news.setSource(Source.MEDIAFAX.getSource());
+                news.setSource(Source.MEDIAFAX.getSourceName());
                 news.setScrapedDateTime(extractLocalDateTime());
               }
               if (news.getUrl() != null) {
@@ -90,10 +91,11 @@ public class UtilityClass {
 
     } catch (IOException | InterruptedException e) {
       e.printStackTrace();
+      Thread.currentThread().interrupt();
     }
   }
 
-  public static void extractDataFromMashable(ConcurrentLinkedQueue<News> newsList, String url) {
+  public static void extractDataFromMashable(Queue<News> newsList, String url) {
     try {
       Document document = Jsoup.connect(url).get();
       Element element = document.getElementsByClass("justify-center mt-8 w-full").first();
@@ -112,7 +114,7 @@ public class UtilityClass {
                 news.setTitle(ads.select("a").first().text());
                 news.setUrl("https://mashable.com" + ads.select("a").attr("href"));
                 news.setImgSrc(ads.select("img").attr("src"));
-                news.setSource(Source.MASHABLE.getSource());
+                news.setSource(Source.MASHABLE.getSourceName());
                 news.setScrapedDateTime(extractLocalDateTime());
               }
               if (news.getUrl() != null) {
@@ -126,10 +128,11 @@ public class UtilityClass {
 
     } catch (IOException | InterruptedException e) {
       e.printStackTrace();
+      Thread.currentThread().interrupt();
     }
   }
 
-  public static void extractDataFromGalaxyTech(ConcurrentLinkedQueue<News> newsList, String url) {
+  public static void extractDataFromGalaxyTech(Queue<News> newsList, String url) {
     try {
       Document document = Jsoup.connect(url).get();
       Element element = document.getElementsByClass("content-area").first();
@@ -147,7 +150,7 @@ public class UtilityClass {
                 news.setUrl(extractUrl(ads.select("a").last().attr("href")));
                 String imgSrc = ads.select("img").attr("srcset");
                 news.setImgSrc(imgSrc.substring(0, imgSrc.indexOf(" ")));
-                news.setSource(Source.GALAXYTECH.getSource());
+                news.setSource(Source.GALAXYTECH.getSourceName());
                 news.setScrapedDateTime(extractLocalDateTime());
               }
               if (news.getUrl() != null) {
@@ -161,6 +164,7 @@ public class UtilityClass {
 
     } catch (IOException | InterruptedException e) {
       e.printStackTrace();
+      Thread.currentThread().interrupt();
     }
   }
 

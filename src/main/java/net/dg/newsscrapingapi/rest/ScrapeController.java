@@ -24,7 +24,8 @@ public class ScrapeController {
   @GetMapping("/scrapenews")
   public ResponseEntity<List<News>> scrapeNews() {
 
-    LOGGER.info("Inside of scrapeNews method of ScrapeController");
-    return ResponseEntity.ok(newsService.scrapeNews());
+    List<News> newsList = newsService.scrapeNews();
+    LOGGER.info("ScrapeController:, found {} number of news ", newsList.size());
+    return ResponseEntity.ok(newsList);
   }
 }
