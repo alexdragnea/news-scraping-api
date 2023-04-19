@@ -156,7 +156,7 @@ public class UtilityClass {
                 news.setSource(Source.GALAXYTECH.getSourceName());
                 news.setScrapedDateTime(extractLocalDateTime());
               }
-              if (news.getUrl() != null) {
+              if (news.getUrl() != null && !news.getTitle().toLowerCase().contains("loto")) {
                 newsList.offer(news);
               }
             });
